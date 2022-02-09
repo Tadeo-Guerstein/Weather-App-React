@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.full{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.highlight{
+  height: 170px;
+  background-color: rgb(255, 255, 255, 0.3);
+  transition-duration: 1000ms;
+}
+
+.highlight:hover{
+  background-color: rgb(255, 255, 255, 0.7);
+  transition-duration: 1000ms;
+}
