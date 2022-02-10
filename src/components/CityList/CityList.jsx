@@ -15,9 +15,12 @@ const getCityCode = (city, countryCode) => `${city}-${countryCode}`
 // renderCityAndCountry se va a convertir en una funcion que retorna otra funcion
 const renderCityAndCountry = eventOnClickCity => (cityAndCountry, weather) => {
     const { city, countryCode, country } = cityAndCountry;
-    console.log(weather);
     return (
-        <ListItem button key={getCityCode(city, countryCode)} onClick={eventOnClickCity}>
+        <ListItem 
+            button 
+            key={getCityCode(city, countryCode)} 
+            onClick={() => eventOnClickCity(city, countryCode)}
+        >
             <Grid container justifyContent="center" alignItems="center">
                 <Grid item md={9} xs={12}>
                     <CityInfo city={city} country={country}/>
@@ -34,7 +37,6 @@ const renderCityAndCountry = eventOnClickCity => (cityAndCountry, weather) => {
 const CityList = ({ cities, onClickCity }) => {
     const [allWeather, setAllWeather] = useState({});
     const [error, setError] = useState(null)
-    
     useEffect(() => {
         const setWeather = async (city, countryCode) => {
             const apiId = "e90c52a68c04c11a7cfb6bfd8a8a4a8b";
