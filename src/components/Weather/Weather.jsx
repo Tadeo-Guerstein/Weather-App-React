@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Typography from'@material-ui/core/Typography';
@@ -7,25 +7,26 @@ import IconsClimate, {validValues} from '../IconsClimate';
 import { IconContext } from 'react-icons'
 
 const Weather = ({ temperature, state }) => {
-return (
-    <Grid container item direction="row" justifyContent="center" alignItems="center" >
-        <IconContext.Provider value={{ size:'5em' }}>
+    const iconContextSize = useMemo(() => ({size: "5em"}), [])
+    return (
+        <Grid container item direction="row" justifyContent="center" alignItems="center" >
+            <IconContext.Provider value={iconContextSize}>
+                {
+                    state ?
+                    <IconsClimate state={state}/> 
+                    :
+                    <Skeleton variant="circle" height={80} width={80}></Skeleton> 
+                }
+            </IconContext.Provider>
             {
-                state ?
-                <IconsClimate state={state}/> 
+                temperature ?
+                <Typography display="inline" variant="h2">{temperature}</Typography>
                 :
-                <Skeleton variant="circle" height={80} width={80}></Skeleton> 
-            }
-        </IconContext.Provider>
-        {
-            temperature ?
-            <Typography display="inline" variant="h2">{temperature}</Typography>
-            :
-            <Skeleton variant="rect" height={80} width={80}></Skeleton> 
+                <Skeleton variant="rect" height={80} width={80}></Skeleton> 
 
-        }
-    </Grid>
-);
+            }
+        </Grid>
+    );
 };
 
 Weather.propTypes = {
