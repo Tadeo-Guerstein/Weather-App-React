@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 //* this.(algo) hace referencia a la instancia de la clase
-class ErrorBoundary extends Component {
+class ErrorBoundary extends PureComponent {
     
     constructor(props){ 
         super(props)
