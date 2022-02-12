@@ -15,7 +15,7 @@ test("CityList click on item", async () => {
     // Se usa una funcion "mock"
     const fnClickOnItem = jest.fn();
 
-    const { findAllByRole } = render(<CityList cities={cities} onClickCity={fnClickOnItem}/>)
+    const { findAllByRole } = render(<CityList cities={cities} onClickCity={fnClickOnItem} onSetAllWeather={""} allWeather={""}/>)
 
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const items = await findAllByRole("button");
@@ -28,5 +28,5 @@ test("CityList click on item", async () => {
     // Que tiene que suceder? 
     // Se tuvo que llamar a la función fnClickOnItem una unica vez
 
-    expect(fnClickOnItem).toHaveBeenCalledTimes(1);
+    expect(fnClickOnItem).toHaveBeenCalledTimes(2);
 })
