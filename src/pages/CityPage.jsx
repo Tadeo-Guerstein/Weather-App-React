@@ -14,15 +14,20 @@ import { getCityCode } from '../utils/utils';
 import { getCountryNameByCountryCode } from '../utils/serviceCities';
 
 const CityPage = ({data, actions}) => {
-    const { onSetAllWeather, onSetChartData, onSetforecastItemList } = actions;
-    const { allWeather, chartData, forecastItemList } = data;
-    const { countryCode, city } = useCityPage(onSetChartData, onSetforecastItemList);
+    // const { onSetAllWeather, onSetChartData, onSetforecastItemList } = actions;
+    const { allWeather, allChartData, allForecastItemList } = data;
+    const { countryCode, city } = useCityPage(actions, allChartData, allForecastItemList);
     
     const cities = useMemo(() => ([{ city, countryCode }]), [city, countryCode])
 
-    useCityList(cities, allWeather, onSetAllWeather)
+    useCityList(cities, allWeather, actions)
     
-    const weather = allWeather[getCityCode(city, countryCode)]
+    const cityCode = getCityCode(city, countryCode)
+
+    const chartData = allChartData[cityCode]
+    const forecastItemList = allForecastItemList[cityCode]
+
+    const weather = allWeather[cityCode]
 
     const humidity = weather && weather.humidity;
     const wind = weather && weather.wind; 
