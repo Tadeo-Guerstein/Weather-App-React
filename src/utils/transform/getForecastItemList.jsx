@@ -7,7 +7,7 @@ const getForecastItemList = (data) => {
     .filter((item, index) => interval.includes(index))
     .map(item => {
         return ({
-            hour: moment.unix(item.dt).hour(),
+            hour: `${moment.unix(item.dt).hour()}:00`,
             weekDay: moment.unix(item.dt).format("dddd"),
             state: item.weather[0].main.toLowerCase(),
             temperature: toCelsius(item.main.temp)
